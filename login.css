@@ -41,7 +41,6 @@ img{
     cursor:pointer;
     outline:none;
  font-family:"Monaco",monospace;}
-
 .login:hover{
     background-color: gray;
     border:1% darkgray;}
