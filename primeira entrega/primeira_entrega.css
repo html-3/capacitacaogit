@@ -12,7 +12,6 @@ body{
     background-color:rgb(243,243,243);
     font-family: Arial;
     font-size: 14px;}
-img,b{cursor:pointer;}
 #navbar{
     height: 54px;
     width: 100%;
@@ -41,16 +40,48 @@ img,b{cursor:pointer;}
     background-color:rgb(243,243,243)}
 #pic{
     border-radius: 100%;
-    border:1px solid rgb(38,38,38);}
+    border:1.5px solid rgb(38,38,38);}
 #postagem{
     display:flex;
     justify-content: space-between;
-    padding:0px;
     margin:30px;
     width: 935px;
     height: 600px;
     background-color: rgb(247,247,247);}
-#texto{
+.slider{
+    width: 600px; 
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;}
+.slide{
+    width: 2400px;
+    height: 600px;
+    position: relative;
+    transition:left 2s;
+    -webkit-transition:left 2s;
+    -moz-transition:left 2s;
+    -o-transition:left 2s;
+    }
+.foto{
+    float:left;
+    margin:0px;
+    padding: 0px;}
+.pontos_slider{
+    top:-40px;
+    left:260px;
+    position: relative;}
+.ponto{
+    height: 15px;
+    width: 15px;
+    border-radius: 100%;
+    display: inline-block;
+    background-color:rgba(247, 247, 247, 0.60);}
+#slider_foto1:target ~.slide{left:0px;}
+#slider_foto2:target ~.slide{left:-600px;}
+#slider_foto3:target ~.slide{left:-1200px;}
+#slider_foto4:target ~.slide{left:-1800px;}
+#texto_lateral{
     height: 600px;
     width: 335px;
     display: flex;
@@ -62,47 +93,67 @@ img,b{cursor:pointer;}
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items:center;
     border-bottom:1px solid rgb(222,222,222);}
-#pic2, #mais{
-    margin:10px;
-    border-radius: 100%;
-    float: left;}
+#pic2, #pic3{
+    padding: 0px 10px 10px 5%;
+    border-radius: 100%;}
+#mais, #salvar{padding-right: 7%;}
 #usuario{
     display: flex;
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    padding-top: 10px;}
-#info{
-    display: flex;
-    flex-direction: row;
-    overflow: scroll;
-    overflow-x: hidden; /*scrollbar horizontal invisível in*/}
+    padding: 10px 0px 0px 5px;}
 #comentários{
     display: flex;
     flex-direction: column;
-    margin: 5% 10% 5% 5%;}
+    padding: 5% 5% 0% 0%;
+    overflow: scroll;
+    overflow-x: hidden; /*scrollbar horizontal invisível in*/}
+#comentário1, #comentário2{
+    display:flex;
+    flex-direction: row;
+}
 #outros{
     width: 335px;
     height: 170px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-top:1px solid rgb(222,222,222);
     background-color:rgb(247,247,247);}
-#buttons{
-    width: 30%;
+#botoes{
+    width:100%;
     display:flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    margin: 3% 10% 0% 3%;}
+    justify-content: space-between;}
+#botoes_direita{
+    width: 25%;
+    padding-left:6%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;}
 #curtidas{
-    margin: 0% 10% 0% 5%;}
+    margin: 5% 0% 5% 15%;}
+#comentar_completo{
+    width: 335px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top:1px solid rgb(222,222,222);}
+#emojie{padding-left: 5%;}
 #comentar{
-    width:318px;
+    width:70%;
     height:40px;
     border:0px;
-    border-top:1px solid rgb(222,222,222);
+    outline: none;
     background-color:rgb(247,247,247);
-    padding-left: 5%;}
+    padding-left: 4%;}
+c{
+    padding-right:5%;
+    color:dodgerblue;}
+c:hover{color:skyblue;}
+img,b{cursor:pointer;}
