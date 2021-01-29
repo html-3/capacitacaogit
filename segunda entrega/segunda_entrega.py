@@ -25,7 +25,7 @@ tipoTorneiosTodos={"T":"Todos contra todos","MM":"Mata-mata"}
 
 
 class Torneio: #classe determina por default uma configuração de torneio usando chaves
-    nomeEscolhido=random.choice(nomeTorneiosTodos)+" de Karatê"            #Nome
+    nomeEscolhido=random.choice(nomeTorneioTodos)+" de Karatê"            #Nome
     sexoEscolhido=random.choice(list(sexoTorneiosTodos.keys()))            #Masculino ou Feminino
     pesoEscolhido=random.choice(list(pesoTorneiosTodos.keys()))            #Leve, Médio, Pesado ou Super pesado 
     categoriaEscolhido=random.choice(list(categoriaTorneiosTodos.keys()))  #Junior, Sub-21 ou Senior
@@ -93,6 +93,8 @@ class Lutador(object): #class lutador para gerar e inscrever lutadores, apenas u
     def get_data(self):
         self.poder=round((self.peso*self.altura^2)^(self.treino+self.sorte/100),2)
         return self.poder
+    def __str__(self): #não sei se funciona, provavelmente não funciona
+        return self.nome,self.sobrenome,self.sexo,self.peso,self.caterogia,self.idade,self.faixa,self.altura,self.altura,self.número,self.treino,self.sorte
 
 def inscreverLutador(sexoEscolhido,pesoEscolhido,categoriaEscolhido): #determina os atributos dum lutador pelo usuário
     while True:
@@ -168,16 +170,15 @@ def torneioT():
     for i in range(8):
         for j in range(i+1,8):
             if Lutador(i).get_data()<Lutador(j).get_data():
-                    vitórias[i]=vitórias[i]+1
-                else:
-                    vitórias[j]=vitórias[j]+1
+                vitórias[i]=vitórias[i]+1
+            else:
+                vitórias[j]=vitórias[j]+1
     print(f"{torneioE.nomeEscolhido} {torneioE.nomeEscolhido} {sexoTorneiosTodos[torneioE.sexoEscolhido]} {pesoTorneiosTodos[torneioE.pesoEscolhido]} {categoriaTorneiosTodos[torneioE.categoriaEscolhido]}")
-    for i in range(8)
+    for i in range(8):
         n=max(vitórias)
         print(f"{n+1}° Lugar: {n}-{7-n} {Lutador(n).nome} {Lutador(n).sobrenome} {Lutador(n).idade} {Lutador(n).peso}kg {Lutador(n).altura}m {Lutador(n).faixa} ")
-        vitórias.pop[vitórias.index[n]]
+        vitórias=vitórias.remove[vitórias.index[n]]
     vitórias=[]
-
 
 #dispocições iniciais do programa
 torneioE=Torneio
@@ -185,39 +186,44 @@ lutadores=[]
 vitórias=[0,0,0,0,0,0,0,0]
 for i in range(8):
     lutadores.append(Lutador(i))
-loc=0
+loc="0"
+#menu interno
+def menuInterno():
+    while True:
+        loc="0"
+        torneioE=Torneio(criarTorneio())
+        loc=input("Escolha uma opção:\n1) Inscrever lutador\n2) Ver lutadores\n3) Simular Luta\n4) Simular torneio\nv) Voltar\n\t")
+        if loc=="1":
+        #inscrever lutador
+            lutadores=lutadores.remove(0)
+            lutadores=lutadores.append(Lutador(inscreverLutador())
+        elif loc=="2":
+        #ver lutadores
+            for n in range(8):
+                print(f"{Lutador(n).nome} {Lutador(n).sobrenome} {Lutador(n).idade} {Lutador(n).peso}kg {Lutador(n).altura}m {Lutador(n).faixa}")
+        elif loc=="3":
+        #simular luta
+            rival=random.randint(6)
+            if Lutador(7).get_data()<Lutador(rival).get_data():
+                print(f"Vitória: {Lutador(7).nome} {Lutador(7).sobrenome} {Lutador(7).idade} {Lutador(7).peso}kg {Lutador(7).altura}m {Lutador(7).faixa}")
+                print(f"Derrota: {Lutador(rival).nome} {Lutador(rival).sobrenome} {Lutador(rival).idade} {Lutador(rival).peso}kg {Lutador(rival).altura}m {Lutador(rival).faixa}")
+            else:
+                print(f"Vitória: {Lutador(rival).nome} {Lutador(rival).sobrenome} {Lutador(rival).idade} {Lutador(rival).peso}kg {Lutador(rival).altura}m {Lutador(rival).faixa}")
+                print(f"Derrota: {Lutador(7).nome} {Lutador(7).sobrenome} {Lutador(7).idade} {Lutador(7).peso}kg {Lutador(7).altura}m {Lutador(7).faixa}")
+        elif loc=="4":
+        #simular torneio
+            torneioT()
+        elif loc=="v":
+            print("\n")
+            break
+
 #menu externo
 while True:
     loc=input("Escolha uma opção:\n1) Torneio definido\n2) Torneio aleatório\ne) Encerrar\n\t")
     #torneio definido
     if loc=="1":
-        while True:
     #menu interno
-            torneioE=Torneio(criarTorneio())
-            loc=input("Escolha uma opção:\n1) Inscrever lutador\n2) Ver lutadores\n3) Simular Luta\n4) Simular torneio\nv) Voltar\n\t")
-            if loc=="1":
-        #inscrever lutador
-                lutadores.append(Lutador(inscreverLutador())
-                lutadores=lutadores.pop(0)
-            elif loc=="2":
-        #ver lutadores
-                for n in range(8):
-                    print(f"{Lutador(n).nome} {Lutador(n).sobrenome} {Lutador(n).idade} {Lutador(n).peso}kg {Lutador(n).altura}m {Lutador(n).faixa}")
-            elif loc=="3":
-        #simular luta
-                rival=random.randint(6)
-                if Lutador(7).get_data()<Lutador(rival).get_data():
-                    print(f"Vitória: {Lutador(7).nome} {Lutador(7).sobrenome} {Lutador(7).idade} {Lutador(7).peso}kg {Lutador(7).altura}m {Lutador(7).faixa}")
-                    print(f"Derrota: {Lutador(rival).nome} {Lutador(rival).sobrenome} {Lutador(rival).idade} {Lutador(rival).peso}kg {Lutador(rival).altura}m {Lutador(rival).faixa}")
-                else:
-                    print(f"Vitória: {Lutador(rival).nome} {Lutador(rival).sobrenome} {Lutador(rival).idade} {Lutador(rival).peso}kg {Lutador(rival).altura}m {Lutador(rival).faixa}")
-                    print(f"Derrota: {Lutador(7).nome} {Lutador(7).sobrenome} {Lutador(7).idade} {Lutador(7).peso}kg {Lutador(7).altura}m {Lutador(7).faixa}")
-            elif loc=="4":
-        #simular torneio
-                torneioT()
-            elif loc=="v":
-                print("\n")
-                break
+        menuInterno()
     elif loc=="2":
     #simular torneio aleatório
         torneioT()
