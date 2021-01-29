@@ -20,7 +20,7 @@ categoriaIdadeTorneios={
 categoriaFaixaTorneios={
     "1":["Laranja"],"2":["Vermelha"],"3":["Laranja","Vermelha"],
     "4":["Verde"],"5":["Roxa"],"6":["Marrom"],"7":["Verde","Roxa","Marrom"],
-    "8":["Preta 1° Dan"],"9":["Preta 2° Dan"],"10":["Preta 1° Dan"¨,"Preta 2° Dan"]}
+    "8":["Preta 1° Dan"],"9":["Preta 2° Dan"],"10":["Preta 1° Dan","Preta 2° Dan"]}
 tipoTorneiosTodos={"T":"Todos contra todos","MM":"Mata-mata"}
 
 
@@ -84,10 +84,13 @@ class Lutador(object): #class lutador para gerar e inscrever lutadores, apenas u
         self.peso=peso     
         self.idade=idade               
         self.faixa=faixa
-         self.altura=altura
+        self.altura=altura
         #atributos únicos e aleatórios
         self.treino=random.randint(range(50,96))     
-        self.sorte=random.randint(range(0,6))                 
+        self.sorte=random.randint(range(0,6))
+    def get_data(self):
+        self.poder=round((self.peso*self.altura^2)^(self.treino+self.sorte/100),2)
+        return self.poder
 
 def inscreverLutador(sexoEscolhido,pesoEscolhido,categoriaEscolhido): #determina os atributos dum lutador pelo usuário
     while True:
@@ -157,14 +160,19 @@ def gerarLutador(sexoEscolhido,pesoEscolhido,categoriaEscolhido): #determina os 
     alturaSorteado=round(random.uniform(1.60,2.10),2)
     return nomeSorteado,sobrenomeSorteado,sexoSorteado,pesoSorteado,categoriaSorteado,idadeSorteado,faixaSorteado,alturaSorteado
 
-def luta(altura1,peso1,treino1,sorte1,altura2,peso2,treino2,sorte2):
-    desição=round(((treino1+sorte1-1)/(treino2+sorte2-1))^3+(altura1^2*peso1)/(altura2^2*peso2),3)
-    if desição>1.000:
-        return 1,0
-    else:
-        return 0,1
-def torneioT(vitórias,altura1,peso1,treino1,sorte1,altura2,peso2,treino2,sorte2):
+def torneioT():
+    for i in range(8):
+        for j in range(i+1,8):
+            if Lutador(i).get_data()<Lutador(j).get_data():
+                    vitórias[i]=vitórias[i]+1
+                else:
+                    vitórias[j]=vitórias[j]+1
+    for i in range(8)
     
+    print(f"1° Lugar: {Lutador}")
+
+
+
 #dispocições iniciais do programa
 torneioE=Torneio
 lutadores=[]
