@@ -1,185 +1,178 @@
 import random 
 #atributos do lutador
-nomeMT=["Bruno","Pedro","Pedro","Pedro","Pedro","Thiago","João","José","Antônio","Francisco","Carlos","Matheus","Paulo","Lucas","Luiz","Gabriel","Daniel","Marcelo","Eduardo","Felipe","Rodrigo","Sócrates","Arthur","Lorenzo","Théo","Pedro Henrique","Gustavo","Murilo","Vitor","João Vitor"]
-nomeFT=["Diana","Mariana","Cecíla","Camila","Fernanda","Antônia","Ana","Ana Maria","Cláudia","Ana Cláudia","Maria","Beatriz","Laura","Emanuela","Mel","Jéssica","Júlia","Isabela","Luísa","Heloísa","Sofia","Laura","Alice","Gabriela","Maria Eduarda"]
-nomeST=["Dias","Porto","Silva","da Silva","Santos","Oliveira","Souza","Costa","Ferreira","Barbosa","Amaral","Soares","Alves","Andrade","Castro","Carvalho","Lima","Gomes","Costa","Ribeiro"]
-#faixasjh=["roxa","marrom","preta"]
-#faixasjf=["azul","roxa","marrom","preta"]
-#faixasm1=["amarelo","verde","azul"]
-#faixasm2=["marrom","vermelha"]
-faixasK=["verde","roxa","marrom","preta"]
+nomeMasculinoTodos=["Bruno","Pedro","Pedro","Pedro","Pedro","Thiago","João","José","Antônio","Francisco","Carlos","Matheus","Paulo","Lucas","Luiz","Gabriel","Daniel","Marcelo","Eduardo","Felipe","Rodrigo","Sócrates","Arthur","Lorenzo","Théo","Pedro Henrique","Gustavo","Murilo","Vitor","João Vitor"]
+nomeFemeninoTodos=["Diana","Mariana","Cecíla","Camila","Fernanda","Antônia","Ana","Ana Maria","Cláudia","Ana Cláudia","Maria","Beatriz","Laura","Emanuela","Mel","Jéssica","Júlia","Isabela","Luísa","Heloísa","Sofia","Laura","Alice","Gabriela","Maria Eduarda"]
+sobrenomeTodos=["Dias","Porto","Silva","da Silva","Santos","Oliveira","Souza","Costa","Ferreira","Barbosa","Amaral","Soares","Alves","Andrade","Castro","Carvalho","Lima","Gomes","Costa","Ribeiro"]
 
 #atributos do torneio
-nomeTT=["Torneio do Vale","Campeonato da Costa","Prova do Alto","Primeiro Campeonato da Confederação Brasileira","Competição Nacional","Torneio Local"]
-pesoTT={"L":"Leve","M":"Médio","P":"Pesado","S":"Super pesado"}
-sexoTT={"M":"Masculino","F":"Feminino"}
-tipoTT={"T":"Todos contra todos","MM":"Mata-mata"}
-categoriaTT={
-    "1":"Junior Laranja",
-    "2":"Junior Vermelha",
-    "3":"Junior Livre",
-    "4":"Sub-21 Verde",
-    "5":"Sub-21 Roxa",
-    "6":"Sub-21 Marrom",
-    "7":"Sub-21 Livre",
-    "8":"Senior Preta 1° Dan",
-    "9":"Senior Preta 2° Dan",
-    "10":"Senior Livre"}
-pesoTTR={"L":range(51,60),"M":range(61,70),"P":range(71,80),"SP":range(81,100)}
-idadeTTR={"JUN":[14,15,16,17],"SEN":[18,19,20],"SEN":range(21,35)}
-categoriaTTR={}
-faixaTT={"1":"Laranja","2":"Vermelha","4":"Verde","5":"Roxa","6":"Marrom","8":"Preta 1° Dan","9":"Preta 2° Dan"}
+#relação categoria-idade e categoria-faixa são para gerar os outros lutadores
+nomeTorneioTodos=["Torneio do Vale","Campeonato da Costa","Prova do Alto","Primeiro Campeonato da Confederação Brasileira","Competição Nacional","Torneio Local"]
+sexoTorneiosTodos={"M":"Masculino","F":"Feminino"}
+pesoTorneiosTodos={"L":range(51,61),"M":range(61,71),"P":range(71,81),"SP":range(81,101)}
+categoriaTorneiosTodos={
+    "1":"Junior Laranja","2":"Junior Vermelha","3":"Junior Livre",
+    "4":"Sub-21 Verde","5":"Sub-21 Roxa","6":"Sub-21 Marrom","7":"Sub-21 Livre",
+    "8":"Senior Preta 1° Dan","9":"Senior Preta 2° Dan","10":"Senior Livre"}
+categoriaIdadeTorneios={
+    "1":range(14,18),"2":range(14,18),"3":range(14,18),
+    "4":range(18,21),"5":range(18,21),"6":range(18,21),"7":range(18,21),
+    "8":range(21,36),"9":range(21,36),"10":range(21,36)}
+categoriaFaixaTorneios={
+    "1":["Laranja"],"2":["Vermelha"],"3":["Laranja","Vermelha"],
+    "4":["Verde"],"5":["Roxa"],"6":["Marrom"],"7":["Verde","Roxa","Marrom"],
+    "8":["Preta 1° Dan"],"9":["Preta 2° Dan"],"10":["Preta 1° Dan"¨,"Preta 2° Dan"]}
+tipoTorneiosTodos={"T":"Todos contra todos","MM":"Mata-mata"}
 
 
-class Torneio: #ok
-    nomeE=random.choice(nomeTT)+" de Karatê"
-    tipoE=random.randint(list(tipoTT.keys()))           #T ou MM
-    sexoE=random.randint(list(sexoTT.keys()))           #M ou F
-    pesoE=random.choice(list(pesoTT.keys()))            #L, M, P ou SP | [51,60], [61,70], [71,80] ou [81,100]
-    categoriaE=random.choice(list(categoriaTT.keys()))  #JUN(1,2,3), S21(4,5,6,7) ou SEN(8,9,10) | [14,17], [18,20] ou [21,35]
-    def __init__(self,sexoE,pesoE,categoriaE,tipoE):
-        self.sexoE=sexoE           
-        self.categoriaE=categoriaE 
-        self.nomeE=nomeE            
-        self.pesoE=pesoE                 
+class Torneio: #classe determina por default uma configuração de torneio usando chaves
+    nomeEscolhido=random.choice(nomeTorneiosTodos)+" de Karatê"            #Nome
+    sexoEscolhido=random.choice(list(sexoTorneiosTodos.keys()))            #Masculino ou Feminino
+    pesoEscolhido=random.choice(list(pesoTorneiosTodos.keys()))            #Leve, Médio, Pesado ou Super pesado 
+    categoriaEscolhido=random.choice(list(categoriaTorneiosTodos.keys()))  #Junior, Sub-21 ou Senior
+    tipoEscolhido=random.randint(list(tipoTorneiosTodos.keys()))           #Todos contra todos ou Mata-mata 
+    def __init__(self,sexoEscolhido,pesoEscolhido,categoriaEscolhido,tipoEscolhido): #configuração manual
+        self.sexoEscolhido=sexoEscolhido   
+        self.pesoEscolhido=pesoEscolhido           
+        self.categoriaEscolhido=categoriaEscolhido 
+        self.tipoEscolhido=tipoEscolhido            
 
-def criarTorneio(): #ok
+def criarTorneio(): #função retorna atributos da class Torneio pelo método __init__() 
     while True:
-        sexoI=input("\t\tM=Masculino\n\t\tF=Femenino\n\tEscreva o sexo dos lutadores do torneio: ")
-        if sexoI!="M" or sexoI!="F":
+        sexoDeterminado=input("\t\tM=Masculino\n\t\tF=Femenino\n\tEscreva o sexo dos lutadores do torneio: ")
+        if sexoDeterminado!="M" or sexoDeterminado!="F":
             print("\tSexo inválido para o torneio!\n")
         else:
             print("\n")
             break
     while True:
-        pesoI=input("\t\tL=Leve\n\t\tM=Médio\n\t\tP=Pesado\n\t\tSP=Super pesado\n\tEscreva o peso dos lutadores do torneio: ")
-        if list(pesoTT.keys()).count(pesoI)==1:
+        pesoInscrição=input("\t\tL=Leve\n\t\tM=Médio\n\t\tP=Pesado\n\t\tSP=Super pesado\n\tEscreva o peso dos lutadores do torneio: ")
+        if list(pesoTorneiosTodos.keys()).count(pesoDeterminado)==1:
             print("\n")
             break
         else:
             print("\tPeso inválido para o torneio!\n")
     while True:
-        categoriaI=input("\t\t1=Junior Laranja\n\t\t2=Junior Vermelho\n\t\t3=Junior Livre\n\t\t4=Sub-21 Verde\n\t\t5=Sub-21 Roxa\n\t\t6=Sub-21 Marrom\n\t\t7=Sub-21 Livre\n\t\t8=Senior Preta 1° Dan\n\t\t9=Senior Preta 2° Dan\n\t\t10=Senior Livre\n\tEscreva a caterogia do torneio: ")
+        categoriaDeterminado=input("\t\t1=Junior Laranja\n\t\t2=Junior Vermelho\n\t\t3=Junior Livre\n\t\t4=Sub-21 Verde\n\t\t5=Sub-21 Roxa\n\t\t6=Sub-21 Marrom\n\t\t7=Sub-21 Livre\n\t\t8=Senior Preta 1° Dan\n\t\t9=Senior Preta 2° Dan\n\t\t10=Senior Livre\n\tEscreva a caterogia do torneio: ")
         try:
-            categoriaI=int(categoriaI)
+            categoriaDeterminado=int(categoriDeterminadoo)
         except ValueError:
             print("\tCategoria inválida para o torneio!\n")
-        if categoriaI in range(1,10):
+        if categoriaDeterminado in range(1,11):
             break
-        elif isinstance(categoriaI,int):
+        elif isinstance(categoriaDeterminado,int):
             print("\tCategoria inválida para o torneio!\n")
     while True:
-        tipoI=input("\t\tT=Todos contra todos (pontuação)\n\t\tMM=Mata-mata\n\tEscreva o tipo de torneio: ")
-        if tipoI=="T" or tipoI=="MM":
+        tipoDeterminado=input("\t\T=Todos contra todos (pontuação)\n\t\tMM=Mata-mata\n\tEscreva o tipo de torneio: ")
+        if tipoInscrição=="T" or tipoInscrição=="MM":
             print("\n")
             break
         else:
-            print("\tTipo inválido para o torneio!\n")
-    return sexoI, pesoI, categoriaI, tipoI
+            print("\Tipo inválido para o torneio!\n")
+    return sexoDeterminado, pesoDeterminado, categoriaDeterminado, tipoDeterminado
 
-class Lutador: #ok
-    amarcial="Karateca"
-    def __init__(self,nome,nomeS,sexo,idade,peso,altura,categoria,treino,sorte): #nomeI,nomeSI,sexoI,idadeI,pesoI,alturaI
-        self.sexo=sexo                 #(M,F) segundo sexoE
-        self.categoria=categoria       #[1,10] segundo categoriaE
-        self.nome=nome                 #determinado noutra função segundo sexoE
-        self.nomeS=nomeS               #sobrenome
-        self.idade=idade               #[14,15,16,17], [18,19,20] ou [21,35]
-        self.treino=treino             #[50,95]
-        self.sorte=sorte               #[0,5]
-        if                             #determinada noutra função segundo faixaTT
-        self.faixa=faixaTT[categoria]  
-        self.peso=peso                 #[51,60], [61,70], [71,80] ou [81,100] segundo pesoTT?
-        self.altura=altura             #[1.60,2.10]
-    
-def inscreverLutador(): #quase, quase lá
+class Lutador(object): #class lutador para gerar e inscrever lutadores, apenas usa o método  __init__()
+    def __init__(self,nome,sobrenome, sexo,peso,categoria,idade,faixa,altura,número): 
+        #atributo do número do lutador
+        self.número=número
+        #atributos irrelevantes
+        self.nome=nome
+        self.sobrenome=sobrenome   
+        #atributos de torneio                     
+        self.categoria=categoria     
+        #atributos controláveis mas limitados
+        self.sexo=sexo
+        self.peso=peso     
+        self.idade=idade               
+        self.faixa=faixa
+         self.altura=altura
+        #atributos únicos e aleatórios
+        self.treino=random.randint(range(50,96))     
+        self.sorte=random.randint(range(0,6))                 
+
+def inscreverLutador(sexoEscolhido,pesoEscolhido,categoriaEscolhido): #determina os atributos dum lutador pelo usuário
     while True:
-        nomeI,nomeSI=input("\tEscreva o nome completo do lutador: ",sep=" ")
-        if nomeI=="" or nomeI==" " or nomeSI=="" or nomeSI==" ":
+        nomeCompletoInscrição=input("\tEscreva o nome completo do lutador: ")
+        nomeInscrição=nomeCompletoInscrição.split()[0]
+        sobrenomeInscrição=nomeCompletoInscrição.split()[-1]
+        if nomeInscrição==sobrenomeInscrição:
             print("\tNome inválido para o lutador!\n")
         else: 
             print("\n")
             break
-    while True:                                                          #pode ser otimizado sabendo sexoE, nem precisa ser incluido na verdade
-        sexoI=input("\tEscreva o sexo do lutador (M/F): ")
-        if sexoI!="M" or sexoI!="F":
+    while True: #compara o input do sexo com aquele definido no torneio, sexoEscolhido
+        sexoInscrição=input("\tEscreva o sexo do lutador (M/F): ")
+        if sexoInscrição!=sexoEscolhido:
             print("\tSexo inválido para o lutador!\n")
         else:
             print("\n")
             break
-    while True:                                                          #consertado
-        idadeI=input("\tEscreva a idade inteira do lutador: ")
-        try:
-            idadeI=int(idadeI)
-        except ValueError:
+    while True: #compara o input da idade com aquela permitida no torneio, pesoEscolhido
+        idadeInscrição=input("\tEscreva a idade inteira do lutador: ")
+        if categoriaIdadeTorneios[categoriaEscolhido].count(idadeInscrição)==1:
+            print("\n")
+            break
+        else:
             print("\tIdade inválida para o lutador!\n")
-        if range(14,17).count(idadeI)==1 and range(1,3).count(torneioE.tipoE)==1:
+    while True: #compara o input do peso com aquele definido no torneio, pesoEscolhido
+        pesoInscrição=input("\tEscreva o peso inteiro em kilogramas do lutador: ")
+        if pesoTorneiosTodos[pesoEscolhido].count(pesoInscrição)==1:
             print("\n")
             break
-        elif range(18,20).count(idadeI)==1 and range(4,7).count(torneioE.tipoE)==1:
-            print("\n")
-            break
-        elif range(21,35).count(idadeI)==1 and range(8,10).count(torneioE.tipoE)==1:
-            print("\n")
-            break
-        elif isinstance(idadeI,int):
-            print("\tIdade inválida para o lutador!\n")
-    while True:                                                          #consertado, acho
-        pesoI=input("\tEscreva o peso inteiro em kilogramas do lutador: ")
-        try:
-            pesoI=int(pesoI)
-        except ValueError:
+        else:
             print("\tPeso inválido para o lutador!\n")
-        if range(51,60).count(pesoI)==1 and torneioE.pesoE=="L":
+    while True: #compara o input da faixa com aquela definida no torneio, categoriaEscolhida
+        faixaInscrição=input("\tEscreva a faixa com maiúscula do lutador: ")
+        if categoriafaixaTorneios[categoriaEscolhido].count(faixaInscrição)==1:
             print("\n")
             break
-        elif range(61,70).count(pesoI)==1 and torneioE.pesoE=="M":
-            print("\n")
-            break
-        elif range(71,80).count(pesoI)==1 and torneioE.pesoE=="P":
-            print("\n")
-            break
-        elif range(81,100).count(pesoI)==1 and torneioE.pesoE=="SP":
-            print("\n")
-            break
-        elif isinstance(pesoI,int):
-            print("\tIdade inválida para o lutador!\n")
+        else:
+            print("\tFaixa inválida para o lutador!\n")
     while True:
-        alturaI=input("\tEscreva a altura em metros do lutador: ")
+        alturaInscrição=input("\tEscreva a altura em metros do lutador (0.00): ")
         try:
-            alturaI=round(float(alturaI),2)
+            alturaInscrição=round(float(alturaInscrição),2)
         except ValueError:
             print("\tAltura inválida para o lutador!\n")
-        if alturaI<=1.60 or alturaI>=2.10:
-            print("\tAltura muito baixa ou muito alta para o lutador!\n")
+        if alturaInscrição<1.60:
+            print("\tAltura muito baixa para o lutador!\n")
+        elif alturaInscrição>2.10:
+            print("\tAltura muito alta para o lutador!\n")
         else:
             print("\n")
             break
-    categoriaI=torneioE.categoriaE()
-    
-    return nomeI,nomeSI,sexoI,idadeI,pesoI,alturaI
+    categoriaInscrição=torneioEscolhido.categoriaEscolhido
+    return nomeInscrição,sobrenomeInscrição,sexoInscrição,pesoInscrição,categoriaInscrição,idadeInscrição,faixaInscrição,alturaInscrição
 
-torneioE=Torneio()
-
-def gerarLutador(sexoL,categoriaL,pesoL): #?????
-    sexoL=torneioE.sexoE
-    if sexoL="H":
-        nomeL=random.choice(nomeMT)
+def gerarLutador(sexoEscolhido,pesoEscolhido,categoriaEscolhido): #determina os atributos dum lutador aleatoriamente
+    sexoSorteado=torneioEscolhido.sexoEscolhido
+    if sexoSorteado=="H":
+        nomeSorteado=random.choice(nomeMasculinoTodos)
     else:
-        nomeL=random.choice(nomeFT)
-    nomeSL=random.choice(nomeST)
-    if torneio
-    if torneioE.pesoE=="L":
-        pesoL=random.randint(51,60)
-    elif torneioE.pesoE=="M":
-        pesoL=random.randint(61,70)
-    elif torneioE.pesoE=="P":
-        pesoL=random.randint(71,80)
-    elif torneioE.pesoE=="SP":
-        pesoL=random.randint(81,100)
+        nomeSorteado=random.choice(nomeFemeninoTodos)
+    sobrenomeSorteado=random.choice(sobrenomeTodos)
+    pesoSorteado=random.randint(pesoTorneiosTodos[pesoEscolhido])
+    categoriaSorteado=categoriaEscolhido
+    idadeSorteado=random.randint(categoriaIdadeTorneios[categoriaEscolhido])
+    faixaSorteado=random.choice(categoriaFaixaTorneios[categoriaEscolhido])
+    alturaSorteado=round(random.uniform(1.60,2.10),2)
+    return nomeSorteado,sobrenomeSorteado,sexoSorteado,pesoSorteado,categoriaSorteado,idadeSorteado,faixaSorteado,alturaSorteado
 
-lutadores=[Lutador() for i in range(8)]
+def luta(altura1,peso1,treino1,sorte1,altura2,peso2,treino2,sorte2):
+    desição=round(((treino1+sorte1-1)/(treino2+sorte2-1))^3+(altura1^2*peso1)/(altura2^2*peso2),3)
+    if desição>1.000:
+        return 1,0
+    else:
+        return 0,1
+def torneioT(vitórias,altura1,peso1,treino1,sorte1,altura2,peso2,treino2,sorte2):
+    
+#dispocições iniciais do programa
+torneioE=Torneio
+lutadores=[]
+vitórias=[0,0,0,0,0,0,0,0]
+for i in range(8):
+    lutadores.append(Lutador(i))
 loc=0
+#menu da entrega
 while True:
     loc=input("Escolha uma opção:\n1) Torneio definido\n2) Torneio aleatório\ne) Encerrar\n\t")
     if loc=="1":
@@ -204,52 +197,9 @@ while True:
         if loc=="1":
     elif loc=="2":
         print("\tSimulando torneio...\n")
-        torneioE=Torneio()
+        
     elif loc=="e":
         print("\tAté mais!\n")
         break
     else:
         print("\tEscolha inválida!\n")
-"""
-while loc!="e": 
-    loc=input("Escolha uma opção:\ne) Encerrar\n2) Criar torneio\n3) Torneio aleatório\n\t")
-    if loc=="2":
-        while loc!="e" or loc!="4":
-            loc=input("Configure o torneio:\ne) Encerrar\n4) Voltar ao menu principal\n5) Inscrever lutador\n6) Tipo de torneio\n7) Categoria\n8) Simular uma luta\n9) Simular Torneio\n\t")
-            if loc=="5":
-                #nome e sobrenome do lutador
-                #altura
-                #peso
-                #registrar em class
-            elif loc=="6":
-                while loc!="e" or loc!="4" or loc!="10":
-                    loc=input("Configure o torneio:\ne) Encerrar\n4) Voltar ao menu principal\n10) Voltar ao menu de torneios\n11) Todos contra todos\n12) Mata-mata\n\t")
-                    if loc=="11":
-                        #torneio todos contra todos
-                    elif loc=="12":
-                        #torneio mata-mata
-                    else: print("\tEscolha inválida!\n")
-            elif loc=="7":
-                 while loc!="e" or loc!="4" or loc!="10":
-                    loc=input("Configure o torneio:\ne) Encerrar\n4) Voltar ao menu principal\n10) Voltar ao menu de torneios\n13) Sexo\n14) Peso\n15) Idade\n\t")
-                    if loc=="13":
-                        #masculino ou feminino
-                    elif loc=="14":
-                        #pena, leve, médio, pesado ou super pesado
-                    elif loc=="15":
-                        #jovem, sub-21 e sensei
-                    else: print("\tEscolha inválida!\n")
-            elif loc=="8":
-                #escolher oponente while if loop
-                #resultado
-            elif loc=="9":
-                #simular torneio
-                #imprimir ranking
-            elif loc=="4": print("\tRetorno ao menu principal.\n")
-            else: print("\tEscolha inválida!\n")
-    elif loc=="3": print("\tSimulando torneio...\n")
-        #simular torneio
-        #imprimir ranking
-    elif loc=="e": print("\tAté mais!\n")
-    else: print("\tEscolha inválida!\n")
-"""
