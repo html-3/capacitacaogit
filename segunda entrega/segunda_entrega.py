@@ -34,7 +34,9 @@ class Torneio: #classe determina por default uma configuração de torneio usand
         self.sexoEscolhido=sexoEscolhido   
         self.pesoEscolhido=pesoEscolhido           
         self.categoriaEscolhido=categoriaEscolhido 
-        self.tipoEscolhido=tipoEscolhido            
+        self.tipoEscolhido=tipoEscolhido
+    def __str__(self): #não sei se funciona, provavelmente não funciona
+        return self.sexoEscolhido,self.pesoEscolhido,self.categoriaEscolhido,self.tipoEscolhido
 
 def criarTorneio(): #função retorna atributos da class Torneio pelo método __init__() 
     while True:
@@ -71,7 +73,7 @@ def criarTorneio(): #função retorna atributos da class Torneio pelo método __
     return sexoDeterminado, pesoDeterminado, categoriaDeterminado, tipoDeterminado
 
 class Lutador(object): #class lutador para gerar e inscrever lutadores, apenas usa o método  __init__()
-    def __init__(self,nome,sobrenome, sexo,peso,categoria,idade,faixa,altura,número): 
+    def __init__(self,nome,sobrenome, sexo,peso,categoria,idade,faixa,altura,número,treino,sorte): 
         #atributo do número do lutador
         self.número=número
         #atributos irrelevantes
@@ -86,8 +88,8 @@ class Lutador(object): #class lutador para gerar e inscrever lutadores, apenas u
         self.faixa=faixa
         self.altura=altura
         #atributos únicos e aleatórios
-        self.treino=random.randint(range(50,96))     
-        self.sorte=random.randint(range(0,6))
+        self.treino=treino 
+        self.sorte=sorte
     def get_data(self):
         self.poder=round((self.peso*self.altura^2)^(self.treino+self.sorte/100),2)
         return self.poder
@@ -158,7 +160,9 @@ def gerarLutador(sexoEscolhido,pesoEscolhido,categoriaEscolhido): #determina os 
     idadeSorteado=random.randint(categoriaIdadeTorneios[categoriaEscolhido])
     faixaSorteado=random.choice(categoriaFaixaTorneios[categoriaEscolhido])
     alturaSorteado=round(random.uniform(1.60,2.10),2)
-    return nomeSorteado,sobrenomeSorteado,sexoSorteado,pesoSorteado,categoriaSorteado,idadeSorteado,faixaSorteado,alturaSorteado
+    treinoSorteado=random.randint(range(50,96)) 
+    sorteSorteado=random.randint(range(0,6))
+    return nomeSorteado,sobrenomeSorteado,sexoSorteado,pesoSorteado,categoriaSorteado,idadeSorteado,faixaSorteado,alturaSorteado,treinoSorteado,sorteSorteado
 
 def torneioT():
     for i in range(8):
@@ -167,10 +171,12 @@ def torneioT():
                     vitórias[i]=vitórias[i]+1
                 else:
                     vitórias[j]=vitórias[j]+1
+    print(f"{torneioE.nomeEscolhido} {torneioE.nomeEscolhido} {sexoTorneiosTodos[torneioE.sexoEscolhido]} {pesoTorneiosTodos[torneioE.pesoEscolhido]} {categoriaTorneiosTodos[torneioE.categoriaEscolhido]}")
     for i in range(8)
-    
-    print(f"1° Lugar: {Lutador}")
-
+        n=max(vitórias)
+        print(f"{n+1}° Lugar: {n}-{7-n} {Lutador(n).nome} {Lutador(n).sobrenome} {Lutador(n).idade} {Lutador(n).peso}kg {Lutador(n).altura}m {Lutador(n).faixa} ")
+        vitórias.pop[vitórias.index[n]]
+    vitórias=[]
 
 
 #dispocições iniciais do programa
@@ -180,32 +186,41 @@ vitórias=[0,0,0,0,0,0,0,0]
 for i in range(8):
     lutadores.append(Lutador(i))
 loc=0
-#menu da entrega
+#menu externo
 while True:
     loc=input("Escolha uma opção:\n1) Torneio definido\n2) Torneio aleatório\ne) Encerrar\n\t")
+    #torneio definido
     if loc=="1":
         while True:
-            torneioE=Torneio(self,criarTorneio())
+    #menu interno
+            torneioE=Torneio(criarTorneio())
             loc=input("Escolha uma opção:\n1) Inscrever lutador\n2) Ver lutadores\n3) Simular Luta\n4) Simular torneio\nv) Voltar\n\t")
             if loc=="1":
-                lutadores.append(lutador.(self,inscreverLutador(),torneioE.categoriaE,)
+        #inscrever lutador
+                lutadores.append(Lutador(inscreverLutador())
+                lutadores=lutadores.pop(0)
             elif loc=="2":
+        #ver lutadores
                 for n in range(8):
-                    
+                    print(f"{Lutador(n).nome} {Lutador(n).sobrenome} {Lutador(n).idade} {Lutador(n).peso}kg {Lutador(n).altura}m {Lutador(n).faixa}")
             elif loc=="3":
-
-            elif loc=="4":
-                if TorneioE.tipoE()="T"
-                
+        #simular luta
+                rival=random.randint(6)
+                if Lutador(7).get_data()<Lutador(rival).get_data():
+                    print(f"Vitória: {Lutador(7).nome} {Lutador(7).sobrenome} {Lutador(7).idade} {Lutador(7).peso}kg {Lutador(7).altura}m {Lutador(7).faixa}")
+                    print(f"Derrota: {Lutador(rival).nome} {Lutador(rival).sobrenome} {Lutador(rival).idade} {Lutador(rival).peso}kg {Lutador(rival).altura}m {Lutador(rival).faixa}")
                 else:
-
+                    print(f"Vitória: {Lutador(rival).nome} {Lutador(rival).sobrenome} {Lutador(rival).idade} {Lutador(rival).peso}kg {Lutador(rival).altura}m {Lutador(rival).faixa}")
+                    print(f"Derrota: {Lutador(7).nome} {Lutador(7).sobrenome} {Lutador(7).idade} {Lutador(7).peso}kg {Lutador(7).altura}m {Lutador(7).faixa}")
+            elif loc=="4":
+        #simular torneio
+                torneioT()
             elif loc=="v":
                 print("\n")
                 break
-        if loc=="1":
     elif loc=="2":
-        print("\tSimulando torneio...\n")
-        
+    #simular torneio aleatório
+        torneioT()
     elif loc=="e":
         print("\tAté mais!\n")
         break
